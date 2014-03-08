@@ -1,32 +1,29 @@
 %include	/usr/lib/rpm/macros.perl
-#
+
 Summary:	API documentation generation tool for GTK+ and GNOME
 Name:		gtk-doc
-Version:	1.18
+Version:	1.20
 Release:	2
 License:	GPL v2+
 Group:		Development/Tools
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	3927bed60fdd0fc9093a1d00018e746a
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.20/%{name}-%{version}.tar.xz
+# Source0-md5:	58532fed036f72fc3bfd4fe79473247b
 URL:		http://www.gtk.org/rdp/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	docbook-style-xsl
-BuildRequires:	gnome-doc-utils
+BuildRequires:	itstool
 BuildRequires:	libxslt-progs
 BuildRequires:	openjade
 BuildRequires:	perl-base
 BuildRequires:	pkg-config
-BuildRequires:	rarian
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
 BuildRequires:	source-highlight
-Requires(post,postun):	rarian
 Requires:	docbook-dtd412-xml
 Requires:	docbook-style-dsssl
 Requires:	docbook-style-xsl
-Requires:	gnome-doc-utils
 Requires:	libxslt-progs
 Requires:	openjade
 Requires:	source-highlight
@@ -74,16 +71,10 @@ install -d $RPM_BUILD_ROOT%{_docdir}/gtk-doc/html
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%find_lang %{name} --with-gnome --with-omf --all-name
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post
-%scrollkeeper_update_post
-
-%postun
-%scrollkeeper_update_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
