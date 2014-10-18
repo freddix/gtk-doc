@@ -2,12 +2,12 @@
 
 Summary:	API documentation generation tool for GTK+ and GNOME
 Name:		gtk-doc
-Version:	1.20
-Release:	2
+Version:	1.21
+Release:	1
 License:	GPL v2+
 Group:		Development/Tools
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.20/%{name}-%{version}.tar.xz
-# Source0-md5:	58532fed036f72fc3bfd4fe79473247b
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.21/%{name}-%{version}.tar.xz
+# Source0-md5:	e361de4750b707590d9ea1b5550fa738
 URL:		http://www.gtk.org/rdp/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -20,13 +20,14 @@ BuildRequires:	perl-base
 BuildRequires:	pkg-config
 BuildRequires:	rpm-perlprov
 BuildRequires:	rpm-pythonprov
-BuildRequires:	source-highlight
+BuildRequires:	yelp-tools
 Requires:	docbook-dtd412-xml
 Requires:	docbook-style-dsssl
 Requires:	docbook-style-xsl
 Requires:	libxslt-progs
 Requires:	openjade
 Requires:	source-highlight
+Requires:	yelp-tools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # architecture-independant pkgconfig dir
@@ -44,13 +45,6 @@ Group:		Development
 Common directories for API documentation for various packages,
 generated using gtk-doc.
 
-%package examples
-Summary:	gtk-doc examples
-Group:		Development
-
-%description examples
-gtk-doc examples.
-
 %prep
 %setup -q
 mv -f doc/README doc/README.docs
@@ -61,6 +55,7 @@ mv -f doc/README doc/README.docs
 %{__autoconf}
 %{__automake}
 %configure \
+	HIGHLIGHT="%{_bindir}/source-highlight"	\
 	--disable-silent-rules
 %{__make}
 
